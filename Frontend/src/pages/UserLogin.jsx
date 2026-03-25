@@ -9,13 +9,13 @@ const UserLogin = () => {
   const navigate = useNavigate();
   const handleSubmit = async(e) =>{
     e.preventDefault();
-
     const email =e.target.email.value;
+    console.log(email);
     const password =e.target.password.value;
 
     const response = await axios.post('http://localhost:3000/api/auth/user/login',{
-      email:email,
-      password:password
+      email,
+      password
     },{
       withCredentials:true
     })
@@ -40,7 +40,7 @@ const UserLogin = () => {
             <input id='password' type="password" name="password" placeholder="••••••••" />
           </label>
 
-          <button type="button" className="auth-btn">Sign in</button>
+          <button type="submit" className="auth-btn">Sign in</button>
         </form>
 
         <div className="auth-switch">

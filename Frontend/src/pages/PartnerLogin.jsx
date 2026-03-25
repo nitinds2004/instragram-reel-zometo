@@ -48,7 +48,7 @@ const PartnerLogin = () => {
             <input type="password" id='password' name="password" placeholder="••••••••" />
           </label>
 
-          <button type="button" className="auth-btn">Sign in</button>
+          <button type="submit" className="auth-btn">Sign in</button>
         </form>
 
         <div className="auth-switch">
