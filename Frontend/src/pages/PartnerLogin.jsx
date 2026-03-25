@@ -9,6 +9,25 @@ const PartnerLogin = () => {
 
     const handleSubmit = async(e) =>{
       e.preventDefault();
+      const email =e.target.email.value;
+      const password =e.target.password.value;
+
+      const response =await axios.post('http://localhost:3000/api/auth/food-partner/login',{
+        email:email,
+        password:password
+        },{
+          withCredentials:true
+        })
+        .then(
+          response =>{
+            console.log(response.Data);
+            navigate("//create-food");
+          }
+        )
+        .catch(error=>{
+          console.error('Login error:', error.response ? error.response.data : error.message);
+        })
+
 
     }
 
@@ -26,7 +45,7 @@ const PartnerLogin = () => {
 
           <label>
             Password
-            <input type="password" id='pas' name="password" placeholder="••••••••" />
+            <input type="password" id='password' name="password" placeholder="••••••••" />
           </label>
 
           <button type="button" className="auth-btn">Sign in</button>
