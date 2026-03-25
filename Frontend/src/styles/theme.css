@@ -1,0 +1,29 @@
+/* Core theme variables (light by default) */
+:root{
+  --bg: #f7f8fb;
+  --card-bg: #ffffff;
+  --text: #0f1724;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --accent-600: #1e40af;
+  --shadow: rgba(16,24,40,0.06);
+  --radius: 12px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --input-bg: rgba(15,23,36,0.03);
+}
+
+/* Dark theme overrides when user prefers dark mode */
+@media (prefers-color-scheme: dark) {
+  :root{
+    --bg: #0b1220;
+    --card-bg: #071025;
+    --text: #e6eef8;
+    --muted: #9aa7bd;
+    --accent: #3b82f6;
+    --accent-600: #60a5fa;
+    --shadow: rgba(2,6,23,0.6);
+    --input-bg: rgba(255,255,255,0.02);
+  }
+}
