@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/reels.css';
 import VideoReel from '../../components/VideoReel';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const sampleVideos = [
   {
@@ -26,16 +28,36 @@ const sampleVideos = [
   }
 ];
 
+
+
 const Home = () => {
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/food/',{
+          withCredentials: true, // Include cookies if your backend uses sessions
+        }); // Adjust the endpoint as needed
+        setVideos(response.data.foodItems); // Assuming the response has a 'foodItems' array
+        console.log('Fetched videos:', response.data.foodItems);
+        // setVideos(response.data); // Uncomment if you implement state to store videos
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
+    };
+    
+    
+    fetchVideos();
+  }, []);
   return (
     <div className="reels-container" role="main" aria-label="Video reels">
-      {sampleVideos.map(v => (
+      {videos.map(v => (
         <VideoReel
-          key={v.id}
-          src={v.src}
-          author={v.author}
-          caption={v.caption}
-          storeUrl={v.storeUrl}
+          key={v._id}
+          src={v.video}
+          author={v.name}
+          caption={v.description}
+          storeUrl={v.foodPartnerId ? `https://example.com/store/${v.foodPartnerId}` : '#'}
         />
       ))}
     </div>
