@@ -57,7 +57,7 @@ const Home = () => {
           src={v.video}
           author={v.name}
           caption={v.description}
-          storeUrl={v.foodPartnerId ? `https://example.com/store/${v.foodPartnerId}` : '#'}
+          storeUrl={v.foodPartner}
         />
       ))}
     </div>

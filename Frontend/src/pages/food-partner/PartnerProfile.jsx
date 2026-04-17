@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/partner.css';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const PartnerProfile = () => {
   // sample data — replace with props or fetched data
@@ -16,14 +18,36 @@ const PartnerProfile = () => {
     ]
   };
 
+  const {id}=useParams();
+  const [profile, setprofile]=useState(null);
+  const [video, setvideo]=useState([]);
+
+
+  useEffect(() => {
+    const fetchPartnerData = async () => {
+      try{
+        const respones=await axios.get(`http://localhost:3000/api/food-partner/${id}`,{withCredentials: true});
+        console.log('Fetched partner data:', respones.data);  
+        setprofile(respones.data.foodPartner);
+        setvideo(respones.data.foodPartner.foodItems);
+      }
+      catch(error){
+        console.error('Error fetching partner data:', error);
+      }
+    }
+
+    fetchPartnerData();
+
+  },[id]);
+
   return (
     <div className="partner-page">
       <div className="partner-card">
         <div className="partner-header">
           <img className="partner-avatar" src={partner.avatar} alt={`${partner.name} avatar`} />
           <div className="partner-info">
-            <div className="partner-name-pill">{partner.name}</div>
-            <div className="partner-address" title={partner.address}>{partner.address}</div>
+            <div className="partner-name-pill">{profile?.name}</div>
+            <div className="partner-address" title={profile?.address}>{profile?.address}</div>
           </div>
         </div>
 
@@ -31,7 +55,7 @@ const PartnerProfile = () => {
 
         <div className="partner-stats">
           <div className="stat">
-            <div className="stat-value">{partner.totalMeals}</div>
+            <div className="stat-value">{video.length}</div>
             <div className="stat-label">total meals</div>
           </div>
           <div className="stat">
@@ -41,9 +65,10 @@ const PartnerProfile = () => {
         </div>
 
         <div className="gallery">
-          {partner.gallery.map((src, idx) => (
+          {video.map((src, idx) => (
             <div className="gallery-item" key={idx}>
-              <img src={src} alt={`food-${idx}`} />
+              {/* <img src={src} alt={`food-${idx}`} /> */}
+              <video src={src.video} muted></video>
             </div>
           ))}
         </div>

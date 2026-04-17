@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 // import '../../styles/reels.css';
 import '../styles/reels.css';
+import { Link, Links } from 'react-router-dom';
 
 const VideoReel = ({ src, author, caption, storeUrl }) => {
   const videoRef = useRef(null);
@@ -49,7 +50,7 @@ const VideoReel = ({ src, author, caption, storeUrl }) => {
       <div className="reel-top">
         <div className="reel-top-left">
           <div className="reel-desc" title={caption}>{caption}</div>
-          <a className="reel-store-btn" href={storeUrl || '#'} target="_blank" rel="noreferrer">Visit store</a>
+          <Link className="reel-store-btn" to={"/food-partner/"+ storeUrl} target="_blank" rel="noreferrer">Visit store</Link>
         </div>
 
         {/* keep actions column on the right */}

@@ -1,5 +1,5 @@
 /* Core theme variables (light by default) */
-:root{
+ :root{
   --bg: #f7f8fb;
   --card-bg: #ffffff;
   --text: #0f1724;
@@ -15,7 +15,7 @@
 }
 
 /* Dark theme overrides when user prefers dark mode */
-@media (prefers-color-scheme: dark) {
+ @media (prefers-color-scheme: dark) {
   :root{
     --bg: #0b1220;
     --card-bg: #071025;
@@ -26,4 +26,5 @@
     --shadow: rgba(2,6,23,0.6);
     --input-bg: rgba(255,255,255,0.02);
   }
-}
+} 
+
