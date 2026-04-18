@@ -4,6 +4,7 @@ import '../../styles/createfood.css';
 import { useNavigate } from 'react-router-dom';
 
 const CreateFood = () => {
+    const navigate = useNavigate();
     const [ name, setName ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ videoFile, setVideoFile ] = useState(null);
@@ -11,7 +12,7 @@ const CreateFood = () => {
     const [ fileError, setFileError ] = useState('');
     const fileInputRef = useRef(null);
 
-    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (!videoFile) {
@@ -62,6 +63,7 @@ const CreateFood = () => {
         })
 
         console.log(response.data);
+
         navigate("/"); // Redirect to home or another page after successful creation
         // Optionally reset
         // setName(''); setDescription(''); setVideoFile(null);
@@ -77,7 +79,7 @@ const CreateFood = () => {
                     <p className="create-food-subtitle">Upload a short video, give it a name, and add a description.</p>
                 </header>
 
-                <form className="create-food-form" onSubmit={onSubmit}>
+                <form className="create-food-form" onSubmit={onSubmit} noValidate>
                     <div className="field-group">
                         <label htmlFor="foodVideo">Food Video</label>
                         <input
